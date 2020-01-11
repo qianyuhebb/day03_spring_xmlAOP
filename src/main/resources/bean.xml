@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop
+        https://www.springframework.org/schema/aop/spring-aop.xsd">
+
+   <!--配置spring的IOC  把service配置进来-->
+    <bean id="IAccountService" class="com.tc.service.impl.IAccountServiceImpl"></bean>
+<!--
+  spring 中基于xml的AOP的配置步骤
+     1.把通知bean交给spring管理
+     2.使用aop:config表示开启aop的配置
+     3.使用aop:aspect 配置切面
+         id属性:指定切面的bean的id
+         ref属性：指定通知类bean
+     4.在aop:aspect内部配置通知的类型
+             （前置通知，后置通知，异常通知，最终通知，环绕通知）
+             切入点表达式的写法
+               关键字 execution（）
+
+
+-->
+    <bean id="logger" class="com.tc.utils.Logger"></bean>
+
+    <aop:config>
+        <aop:aspect id="logAdvice" ref="logger">
+          <aop:before method="printLog"
+                      pointcut="execution(* com.tc.service.impl.IAccountServiceImpl.*(..))"></aop:before>
+        </aop:aspect>
+    </aop:config>
+</beans>
