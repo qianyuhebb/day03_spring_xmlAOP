@@ -29,21 +29,29 @@
         <aop:aspect id="logAdvice" ref="logger">
 
                 <!--前置通知-->
-          <aop:before method="beforePrintLog"  pointcut="execution(* com.tc.service.impl.IAccountServiceImpl.*(..))"></aop:before>
+        <!--  <aop:before method="beforePrintLog"  pointcut="execution(* com.tc.service.impl.IAccountServiceImpl.*(..))"></aop:before>
 
-                  <!--后置通知   在切入点方法正常执行的情况下才执行-->
+                  &lt;!&ndash;后置通知   在切入点方法正常执行的情况下才执行&ndash;&gt;
           <aop:after-returning method="AfterReturnPrintLog"
                  pointcut="execution(* com.tc.service.impl.IAccountServiceImpl.*(..))"></aop:after-returning>
 
-             <!--异常通知   在切入点方法有异常的情况下才执行-->
+             &lt;!&ndash;异常通知   在切入点方法有异常的情况下才执行&ndash;&gt;
             <aop:after-throwing method="AfterThrowingPrintLog"
                  pointcut="execution(* com.tc.service.impl.IAccountServiceImpl.*(..))"></aop:after-throwing>
 
-             <!--最终通知-->
+             &lt;!&ndash;最终通知   可以直接引用切入点表达式&ndash;&gt;
             <aop:after method="AfterPrintLog"
-                 pointcut="execution(* com.tc.service.impl.IAccountServiceImpl.*(..))"></aop:after>
+                 pointcut-ref="pt1"></aop:after>-->
 
+            <!--配置切入点表达式 id属性指定切入点表达式的唯一标识，expression属性
+                指定表达式内容，
+                    此标签这些在aop:aspect标签内部，只能被当前切面使用，
+                    写在外面，可以被所有切面使用
+            -->
+          <aop:pointcut id="pt1" expression="execution(* com.tc.service.impl.IAccountServiceImpl.*(..))"/>
 
+            <!--配置环绕通知-->
+            <aop:around method="AroundPrintLog" pointcut-ref="pt1"></aop:around>
 
         </aop:aspect>
     </aop:config>
