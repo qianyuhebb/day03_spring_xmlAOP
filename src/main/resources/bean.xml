@@ -27,8 +27,24 @@
 
     <aop:config>
         <aop:aspect id="logAdvice" ref="logger">
-          <aop:before method="printLog"
-                      pointcut="execution(* com.tc.service.impl.IAccountServiceImpl.*(..))"></aop:before>
+
+                <!--前置通知-->
+          <aop:before method="beforePrintLog"  pointcut="execution(* com.tc.service.impl.IAccountServiceImpl.*(..))"></aop:before>
+
+                  <!--后置通知   在切入点方法正常执行的情况下才执行-->
+          <aop:after-returning method="AfterReturnPrintLog"
+                 pointcut="execution(* com.tc.service.impl.IAccountServiceImpl.*(..))"></aop:after-returning>
+
+             <!--异常通知   在切入点方法有异常的情况下才执行-->
+            <aop:after-throwing method="AfterThrowingPrintLog"
+                 pointcut="execution(* com.tc.service.impl.IAccountServiceImpl.*(..))"></aop:after-throwing>
+
+             <!--最终通知-->
+            <aop:after method="AfterPrintLog"
+                 pointcut="execution(* com.tc.service.impl.IAccountServiceImpl.*(..))"></aop:after>
+
+
+
         </aop:aspect>
     </aop:config>
 </beans>

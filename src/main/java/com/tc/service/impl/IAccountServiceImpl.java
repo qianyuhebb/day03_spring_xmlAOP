@@ -20,6 +20,7 @@ public class IAccountServiceImpl implements IAccountService {
     public void saveAccount() {
         System.out.println("执行了保存");
         logger.info("测试日志使用");
+        int i =1/0;
 
     }
 

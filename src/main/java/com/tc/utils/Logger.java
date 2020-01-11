@@ -9,8 +9,23 @@ package com.tc.utils;
  **/
 public class Logger {
 
-    public void printLog(){
-        System.out.println("log类增强方法");
+    public void beforePrintLog(){
+        System.out.println("beforePrintLog log类增强方法");
+    }
+    public void AfterReturnPrintLog(){
+        System.out.println("AfterReturnPrintLog log类增强方法");
+    }
+
+    public void AfterThrowingPrintLog(){
+        System.out.println("AfterThrowingPrintLog log类增强方法");
+    }
+
+    public void AfterPrintLog(){
+        System.out.println("AfterPrintLog log类增强方法");
+    }
+
+    public void AroundPrintLog(){
+        System.out.println("AroundPrintLog log类增强方法");
     }
 
 
